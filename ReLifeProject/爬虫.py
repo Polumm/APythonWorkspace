@@ -1,8 +1,9 @@
 # -*- coding:utf-8 -*-
 """
 @文件名:爬虫
-@Author: Polumm
+@Author: 宗闯
 @Time: 2022/1/11 20:04
+感谢学长的帮助！
 """
 import requests as rq
 import re
