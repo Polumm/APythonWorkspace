@@ -54,8 +54,8 @@ def request2():
 def analysis2(text):
     """
     信息解析提取（正则）
-    :param text: 返回的文本信息
-    :return:
+    :param text: utf-8编码的html页面字符串
+    :return: 所有教师姓名拼音缩写的数组
     """
 
     pattern = re.compile('<div class="media-caption">.*?href="(.*?)">(.*?)</a></h2>', re.S)
