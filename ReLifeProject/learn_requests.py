@@ -4,7 +4,7 @@ import re
 import csv
 
 
-def request2():
+def request_for_teachers():
   '''
   爬取老师姓名
   :return:
@@ -19,7 +19,7 @@ def request2():
   return text
 
 
-def analysis2(text):
+def analyse_teachers_url(text):
   """
   信息解析提取（正则）
   :param text: utf-8编码的html页面字符串
@@ -63,6 +63,53 @@ def save(content):
   print("写入完毕！！！")
 
 
-text = request2();
-results = analysis2(text)
+text = request_for_teachers();
+results = analyse_teachers_url(text)
 save(results)
+
+def request(name):
+    """
+    请求函数
+    :param name: 姓名（拼音）
+    :return:
+    """
+
+    url = 'http://grzy.cug.edu.cn/{0}/'.format(name)
+    headers = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
+    }
+    response = requests.get(url, headers=headers)
+    text = response.content.decode('utf-8')
+    return text
+
+
+def analysis(text):
+    """
+    信息解析提取（正则）
+    :param text: 返回的文本信息
+    :return:
+    """
+
+    pattern = re.compile('"jbqk".*?<p>(.*?)</p>.*?主要任职：(.*?)</p>.*?性别：(.*?)</p>.*?毕业院校：(.*?)</p>', re.S)
+    results = re.findall(pattern, text)
+    return results
+
+def detail_request(content):
+  details = [];
+  for row in content:
+    details.append(analysis(request((row[2]))));
+  return details
+
+details = detail_request(results);
+save(details)
+# name = 'wanglunche'
+# headers = {
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
+# }
+# text = request('wanglunche', headers=headers)
+# results = analysis(text)
+
+
+
+
+

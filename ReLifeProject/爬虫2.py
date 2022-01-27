@@ -34,14 +34,15 @@ def analysis(text):
     results = re.findall(pattern, text)
     return results
 
-
+'''
 if __name__ == "__main__":
     name = 'wanglunche'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
-    }
 
-    text = request('wanglunche', headers=headers)
-    results = analysis(text)
+'''
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
+}
+text = request('liuxiuguo', headers=headers)
+results = analysis(text)
 
-    print(results)
+print(results)
